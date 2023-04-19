@@ -60,7 +60,6 @@ public class RideService {
 
         ride.getParticipants().add(tk.getUserRequestId());
         ride.setPlaces(ride.getPlaces()-tk.getPlaces());
-
         rideRepository.save(ride);
     }
 }

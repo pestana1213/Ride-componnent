@@ -26,7 +26,7 @@ public class RideController {
                 UUID.fromString(userId));
     }
 
-    @GetMapping("/confirm")
+    @PatchMapping("/confirm")
     public void confirmRide(String token){
         rideService.confirmRequestRide(token);
     }
