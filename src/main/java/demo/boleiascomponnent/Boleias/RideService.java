@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -61,5 +64,9 @@ public class RideService {
         ride.getParticipants().add(tk.getUserRequestId());
         ride.setPlaces(ride.getPlaces()-tk.getPlaces());
         rideRepository.save(ride);
+    }
+
+    public List<Ride> getAllRidesAvailableFromAnUser(UUID ownerId){
+        return rideRepository.findAllRidesByOwnerId(ownerId).stream().filter(e -> LocalDate.now().isBefore(e.getDayLeft())).collect(Collectors.toList());
     }
 }

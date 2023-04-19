@@ -3,6 +3,7 @@ package demo.boleiascomponnent.Boleias;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,8 +27,13 @@ public class RideController {
                 UUID.fromString(userId));
     }
 
+    @GetMapping()
+    public List<Ride> getAllRidesAvailableFromAnUser(@RequestParam String ownerId){
+        return rideService.getAllRidesAvailableFromAnUser(UUID.fromString(ownerId));
+    }
+
     @PatchMapping("/confirm")
-    public void confirmRide(String token){
+    public void confirmRide(@RequestParam String token) {
         rideService.confirmRequestRide(token);
     }
 
