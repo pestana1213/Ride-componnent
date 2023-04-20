@@ -69,4 +69,8 @@ public class RideService {
     public List<Ride> getAllRidesAvailableFromAnUser(UUID ownerId){
         return rideRepository.findAllRidesByOwnerId(ownerId).stream().filter(e -> LocalDate.now().isBefore(e.getDayLeft())).collect(Collectors.toList());
     }
+
+    public String getTokenFromARide(UUID rideId){
+        return tokenService.getTokenFromARide(rideId).getToken();
+    }
 }

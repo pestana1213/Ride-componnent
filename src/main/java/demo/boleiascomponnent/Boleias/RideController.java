@@ -37,4 +37,9 @@ public class RideController {
         rideService.confirmRequestRide(token);
     }
 
+    @GetMapping("/token")
+    public String getTokenFromARide(@RequestParam String rideId){
+        return rideService.getTokenFromARide(UUID.fromString(rideId));
+    }
+
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,5 +22,10 @@ public class TokenService {
 
     public void delete(Token token){
         tokenRepository.deleteById(token.getId());
+    }
+
+    public Token getTokenFromARide(UUID rideId){
+        return tokenRepository.findByRideId(rideId).orElseThrow( () ->
+                new IllegalArgumentException("Nao ha nenhum token associado a esta boleia (ainda ninguem fez o pedido para participar na boleia)"));
     }
 }
