@@ -3,6 +3,7 @@ package demo.boleiascomponnent.Boleias;
 import demo.boleiascomponnent.Token.Token;
 import demo.boleiascomponnent.Token.TokenService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -67,7 +68,7 @@ public class RideService {
     }
 
     public List<Ride> getAllRidesAvailableFromAnUser(UUID ownerId){
-        return rideRepository.findAllRidesByOwnerId(ownerId).stream().filter(e -> LocalDate.now().isBefore(e.getDayLeft())).collect(Collectors.toList());
+        return rideRepository.findAllRidesByRideOwner(ownerId).stream().filter(e -> LocalDate.now().isBefore(e.getDayLeft())).collect(Collectors.toList());
     }
 
     public String getTokenFromARide(UUID rideId){
